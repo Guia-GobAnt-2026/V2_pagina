@@ -197,7 +197,7 @@ def tab_vacia():
 # ── Carga de datos ────────────────────────────────────────────────────────────
 @st.cache_data(ttl=60)
 def cargar_datos():
-    url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZ83nBz443LGdQdnmFfT7TQs5nZ9C7WEcvtKw6l__yy2HHLonbRjIxgnTido0W3VXaoM24tPxPFIpt/pub?output=csv"
+    url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZ83nBz443LGdQdnmFfT7TQs5nZ9C7WEcvtKw6l__yy2HHLonbRjIxgnTido0W3VXaoM24tPxPFIpt/pub?gid=0&single=true&output=csv"
     df = pd.read_csv(url, engine="python")
     df.columns = [limpiar(col) for col in df.columns]
     return df
