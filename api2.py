@@ -1,4 +1,37 @@
 # -*- coding: utf-8 -*-
+# ============================================================
+# GUÍA TÉCNICA BIOMÉDICA v2
+# ============================================================
+# COLUMNAS ACTUALES EN GOOGLE SHEETS (ya existentes):
+#   Nombre | Código GMDN | Definición | Finalidad Clínica |
+#   Servicios | Especificaciones técnicas | Preinstalación |
+#   Accesorios, consumibles y repuestos | Entrenamiento |
+#   Garantía | Mantenimiento | Documentación | Tipo
+#
+# COLUMNAS NUEVAS (agregar al Sheets con estos encabezados exactos):
+#   Tab 1:  Versión del documento | Fecha de elaboración | Elaborado por
+#   Tab 2:  Codificación complementaria | Clasificación funcional |
+#           Población objetivo | Principales características
+#   Tab 3:  Departamento área clínica | Alcance funcional
+#   Tab 4:  Especificaciones mínimas de desempeño | Parámetros técnicos |
+#           Software y ciberseguridad | Compatibilidad infraestructura |
+#           Idioma de interfaz
+#   Tab 5:  Portabilidad
+#   Tab 6:  Componentes complementarios | Disponibilidad de repuestos
+#   Tab 7:  Embalaje transporte almacenamiento
+#   Tab 8:  Limpieza y desinfección | Disposición final RAEE
+#   Tab 9:  Criterios de aceptación
+#   Tab 10: Tipo de contrato de servicio | Calibración y trazabilidad |
+#           Soporte técnico local
+#   Tab 12: Vida útil | Costo total de propiedad
+#   Tab 13: Clasificación de riesgo | Partes aplicables al paciente |
+#           Registro INVIMA | Certificaciones internacionales |
+#           Referencias normativas | Normas para el fabricante |
+#           Normas para el producto | Validación clínica
+#   Tab 14: Cantidad requerida | Presupuesto referencial
+#   Tab 15: Revisión institucional
+# ============================================================
+
 import re
 import unicodedata
 
@@ -18,13 +51,11 @@ st.markdown(
             radial-gradient(circle at top left, rgba(0, 104, 55, 0.12), transparent 28%),
             linear-gradient(180deg, #f4f8f4 0%, #eef4ef 100%);
     }
-
     .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
         max-width: 1250px;
     }
-
     .header-panel {
         background: linear-gradient(135deg, #006837 0%, #0b8f4a 100%);
         padding: 28px 32px;
@@ -33,144 +64,64 @@ st.markdown(
         box-shadow: 0 18px 40px rgba(0, 104, 55, 0.18);
         margin-bottom: 24px;
     }
-
-    .header-kicker {
-        font-size: 1rem;
-        font-weight: 700;
-        opacity: 0.85;
-        margin-bottom: 12px;
-    }
-
-    .header-title {
-        font-size: 2.2rem;
-        line-height: 1.2;
-        font-weight: 800;
-        margin-bottom: 10px;
-    }
-
-    .header-subtitle {
-        font-size: 1rem;
-        font-weight: 700;
-        opacity: 0.95;
-        max-width: 780px;
-    }
-
+    .header-kicker { font-size:1rem; font-weight:700; opacity:0.85; margin-bottom:12px; }
+    .header-title  { font-size:2.2rem; line-height:1.2; font-weight:800; margin-bottom:10px; }
+    .header-subtitle { font-size:1rem; font-weight:700; opacity:0.95; max-width:780px; }
     .selector-card {
-        background: rgba(255, 255, 255, 0.88);
-        border: 1px solid rgba(0, 104, 55, 0.12);
+        background: rgba(255,255,255,0.88);
+        border: 1px solid rgba(0,104,55,0.12);
         border-radius: 20px;
         padding: 22px 22px 10px 22px;
-        box-shadow: 0 14px 34px rgba(24, 39, 75, 0.08);
+        box-shadow: 0 14px 34px rgba(24,39,75,0.08);
         margin: 10px 0 22px 0;
         backdrop-filter: blur(6px);
     }
-
-    .selector-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #0d4728;
-        margin-bottom: 6px;
-    }
-
-    .selector-help {
-        font-size: 0.95rem;
-        color: #527060;
-        margin-bottom: 14px;
-    }
-
+    .selector-title { font-size:1.5rem; font-weight:700; color:#0d4728; margin-bottom:6px; }
+    .selector-help  { font-size:0.95rem; color:#527060; margin-bottom:14px; }
     div[data-baseweb="select"] > div {
         border-radius: 14px !important;
-        border: 1px solid rgba(0, 104, 55, 0.18) !important;
+        border: 1px solid rgba(0,104,55,0.18) !important;
         min-height: 54px !important;
         box-shadow: none !important;
     }
-
-    div[data-baseweb="select"] > div:hover {
-        border-color: #0b8f4a !important;
-    }
-
+    div[data-baseweb="select"] > div:hover { border-color: #0b8f4a !important; }
     .equipo-hero {
         background: linear-gradient(135deg, #ffffff 0%, #f7fbf8 100%);
         border-radius: 24px;
         padding: 26px 30px;
-        border: 1px solid rgba(0, 104, 55, 0.10);
-        box-shadow: 0 18px 38px rgba(20, 33, 61, 0.09);
+        border: 1px solid rgba(0,104,55,0.10);
+        box-shadow: 0 18px 38px rgba(20,33,61,0.09);
         margin-bottom: 24px;
         position: relative;
         overflow: hidden;
     }
-
     .equipo-hero::after {
-        content: "";
-        position: absolute;
-        inset: auto -40px -40px auto;
-        width: 170px;
-        height: 170px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(0, 104, 55, 0.14), rgba(0, 104, 55, 0));
+        content:""; position:absolute; inset:auto -40px -40px auto;
+        width:170px; height:170px; border-radius:50%;
+        background: radial-gradient(circle, rgba(0,104,55,0.14), rgba(0,104,55,0));
     }
-
-    .equipo-label {
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-        color: #5c7668;
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
-
-    .equipo-title {
-        font-size: 2rem;
-        line-height: 1.2;
-        font-weight: 800;
-        color: #073b22;
-        margin-bottom: 8px;
-    }
-
-    .equipo-caption {
-        font-size: 1rem;
-        color: #587061;
-        max-width: 750px;
-    }
-
+    .equipo-label { font-size:0.85rem; text-transform:uppercase; letter-spacing:0.18em; color:#5c7668; font-weight:700; margin-bottom:12px; }
+    .equipo-title  { font-size:2rem; line-height:1.2; font-weight:800; color:#073b22; margin-bottom:8px; }
+    .equipo-caption { font-size:1rem; color:#587061; max-width:750px; }
     .card {
-        background: rgba(255, 255, 255, 0.94);
+        background: rgba(255,255,255,0.94);
         padding: 18px 20px;
         border-radius: 16px;
-        border: 1px solid rgba(0, 104, 55, 0.09);
-        box-shadow: 0 10px 28px rgba(24, 39, 75, 0.07);
+        border: 1px solid rgba(0,104,55,0.09);
+        box-shadow: 0 10px 28px rgba(24,39,75,0.07);
         margin-bottom: 15px;
     }
-
-    .card-title {
-        font-weight: 700;
-        font-size: 1rem;
-        color: #006837;
-        margin-bottom: 8px;
-    }
-
-    .bullet-list {
-        margin: 0;
-        padding-left: 1.35rem;
-    }
-
-    .bullet-list li {
-        margin-bottom: 0.5rem;
-        line-height: 1.55;
-        color: #24352c;
-    }
-
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        flex-wrap: wrap;
-    }
-
+    .card-title { font-weight:700; font-size:1rem; color:#006837; margin-bottom:8px; }
+    .bullet-list { margin:0; padding-left:1.35rem; }
+    .bullet-list li { margin-bottom:0.5rem; line-height:1.55; color:#24352c; }
+    .stTabs [data-baseweb="tab-list"] { gap:8px; flex-wrap:wrap; }
     .stTabs [data-baseweb="tab"] {
         border-radius: 999px;
         padding: 10px 16px;
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255,255,255,0.7);
         white-space: nowrap;
     }
+    .tab-vacia { color:#94a3a0; font-style:italic; font-size:0.95rem; padding:12px 4px; }
 </style>
 """,
     unsafe_allow_html=True,
@@ -191,6 +142,7 @@ st.markdown(
 )
 
 
+# ── Utilidades ────────────────────────────────────────────────────────────────
 def limpiar(texto):
     texto = unicodedata.normalize("NFKD", str(texto)).encode("ascii", "ignore").decode("ascii")
     texto = texto.lower().strip()
@@ -199,7 +151,6 @@ def limpiar(texto):
 
 
 def formatear_lista(texto):
-    """Convierte texto numerado/con saltos de línea en lista HTML con viñetas."""
     if pd.isna(texto):
         return ""
     lineas = str(texto).split("\n")
@@ -216,29 +167,34 @@ def formatear_lista(texto):
 
 
 def formatear_texto(texto):
-    """Convierte saltos de línea en <br> para texto libre."""
     if pd.isna(texto):
         return ""
     return str(texto).replace("\n", "<br>")
 
 
 def mostrar_campo(ficha, col_key, titulo, modo="texto"):
-    """Muestra una tarjeta solo si la columna existe y tiene valor."""
+    """Muestra tarjeta solo si la columna existe y tiene valor no vacío."""
     if col_key not in ficha.index:
-        return
+        return False
     valor = ficha[col_key]
     if pd.isna(valor) or str(valor).strip() == "":
-        return
-    if modo == "lista":
-        contenido = formatear_lista(valor)
-    else:
-        contenido = formatear_texto(valor)
+        return False
+    contenido = formatear_lista(valor) if modo == "lista" else formatear_texto(valor)
     st.markdown(
         f'<div class="card"><div class="card-title">{titulo}</div>{contenido}</div>',
         unsafe_allow_html=True,
     )
+    return True
 
 
+def tab_vacia():
+    st.markdown(
+        '<div class="tab-vacia">Esta sección aún no tiene datos cargados en el Sheets.</div>',
+        unsafe_allow_html=True,
+    )
+
+
+# ── Carga de datos ────────────────────────────────────────────────────────────
 @st.cache_data(ttl=60)
 def cargar_datos():
     url = "https://docs.google.com/spreadsheets/d/1Hav7p3RYY0FjdN3ztwo-4mWa382xPzpqZDHpwZGmXok/export?format=csv"
@@ -262,7 +218,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-tipos_disponibles = sorted(df["tipo"].dropna().unique()) if "tipo" in df.columns else []
+# Columna de tipo para filtrar
+col_tipo = "tipo"
+tipos_disponibles = sorted(df[col_tipo].dropna().unique()) if col_tipo in df.columns else []
 
 tipo_seleccionado = st.selectbox(
     "Categoría",
@@ -276,13 +234,19 @@ if tipo_seleccionado is None:
     st.info("Selecciona una categoría para continuar.")
     st.stop()
 
-df_filtrado = df[df["tipo"] == tipo_seleccionado]
+df_filtrado = df[df[col_tipo] == tipo_seleccionado]
+
+# Columna de nombre del equipo — usa "nombre" (columna actual del Sheets)
+col_nombre = "nombre"
+if col_nombre not in df_filtrado.columns:
+    st.error(f'No se encontró la columna "{col_nombre}" en el Google Sheets.')
+    st.stop()
 
 equipo = st.selectbox(
     "Equipo",
-    sorted(df_filtrado["nombre_del_equipo"].dropna().unique()),
+    sorted(df_filtrado[col_nombre].dropna().unique()),
     index=None,
-    placeholder="Ej: Monitor de signos vitales, Ventilador, Desfibrilador...",
+    placeholder="Ej: Centrifuga, Agitador, Balanza...",
     label_visibility="collapsed",
 )
 
@@ -290,7 +254,7 @@ if equipo is None:
     st.info("Selecciona un equipo para visualizar su información.")
     st.stop()
 
-ficha = df[df["nombre_del_equipo"] == equipo].iloc[0]
+ficha = df[df[col_nombre] == equipo].iloc[0]
 
 st.markdown(
     f"""
@@ -325,148 +289,161 @@ tabs = st.tabs([
 ])
 
 # ── 1. Control documental ─────────────────────────────────────────────────────
+# Encabezados Sheets: "Versión del documento" | "Fecha de elaboración" | "Elaborado por"
 with tabs[0]:
-    mostrar_campo(ficha, "version_del_documento",
-                  "Versión del documento")
-    mostrar_campo(ficha, "fecha_de_elaboracion_ultima_modificacion",
-                  "Fecha de elaboración / última modificación")
-    mostrar_campo(ficha, "elaborado_diligenciado_por",
-                  "Elaborado / diligenciado por")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "version_del_documento",      "Versión del documento")
+    mostrados += mostrar_campo(ficha, "fecha_de_elaboracion",       "Fecha de elaboración / última modificación")
+    mostrados += mostrar_campo(ficha, "elaborado_por",              "Elaborado / diligenciado por")
+    if not mostrados:
+        tab_vacia()
 
 # ── 2. Identificación y codificación ─────────────────────────────────────────
+# Encabezados Sheets nuevos: "Codificación complementaria" | "Clasificación funcional" |
+#                             "Población objetivo" | "Principales características"
 with tabs[1]:
-    mostrar_campo(ficha, "nombre_del_equipo",
-                  "Nombre del equipo")
-    mostrar_campo(ficha, "codigo_gmdn",
-                  "Código GMDN")
-    mostrar_campo(ficha, "codificacion_complementaria_umdns_ecri_y_unspsc",
-                  "Codificación complementaria (UMDNS/ECRI y UNSPSC)")
-    mostrar_campo(ficha, "clasificacion_funcional_del_equipo",
-                  "Clasificación funcional del equipo")
-    mostrar_campo(ficha, "poblacion_objetivo",
-                  "Población objetivo")
-    mostrar_campo(ficha, "definicion_o_descripcion_general",
-                  "Definición o descripción general")
-    mostrar_campo(ficha, "principales_caracteristicas",
-                  "Principales características", modo="lista")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "nombre",                        "Nombre del equipo")
+    mostrados += mostrar_campo(ficha, "codigo_gmdn",                   "Código GMDN")
+    mostrados += mostrar_campo(ficha, "codificacion_complementaria",   "Codificación complementaria (UMDNS/ECRI y UNSPSC)")
+    mostrados += mostrar_campo(ficha, "clasificacion_funcional",       "Clasificación funcional del equipo")
+    mostrados += mostrar_campo(ficha, "poblacion_objetivo",            "Población objetivo")
+    mostrados += mostrar_campo(ficha, "definicion",                    "Definición o descripción general")
+    mostrados += mostrar_campo(ficha, "principales_caracteristicas",   "Principales características", modo="lista")
+    if not mostrados:
+        tab_vacia()
 
 # ── 3. Propósito de uso ───────────────────────────────────────────────────────
+# Encabezados Sheets nuevos: "Departamento área clínica" | "Alcance funcional"
 with tabs[2]:
-    mostrar_campo(ficha, "definicion_del_uso_clinico_o_finalidad_clinica",
-                  "Definición del uso clínico o finalidad clínica")
-    mostrar_campo(ficha, "servicios",
-                  "Servicios")
-    mostrar_campo(ficha, "departamento_area_clinica_especifica",
-                  "Departamento / área clínica específica")
-    mostrar_campo(ficha, "alcance_funcional",
-                  "Alcance funcional", modo="lista")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "finalidad_clinica",             "Definición del uso clínico o finalidad clínica")
+    mostrados += mostrar_campo(ficha, "servicios",                     "Servicios")
+    mostrados += mostrar_campo(ficha, "departamento_area_clinica",     "Departamento / área clínica específica")
+    mostrados += mostrar_campo(ficha, "alcance_funcional",             "Alcance funcional", modo="lista")
+    if not mostrados:
+        tab_vacia()
 
 # ── 4. Características técnicas ───────────────────────────────────────────────
+# Encabezados Sheets nuevos: "Especificaciones mínimas de desempeño" | "Parámetros técnicos" |
+#                             "Software y ciberseguridad" | "Compatibilidad infraestructura" |
+#                             "Idioma de interfaz"
 with tabs[3]:
-    mostrar_campo(ficha, "especificaciones_minimas_de_desempeno",
-                  "Especificaciones mínimas de desempeño", modo="lista")
-    mostrar_campo(ficha, "parametros_tecnicos_relevantes",
-                  "Parámetros técnicos relevantes", modo="lista")
-    mostrar_campo(ficha, "especificaciones_tecnicas",
-                  "Especificaciones técnicas", modo="lista")
-    mostrar_campo(ficha, "software_actualizaciones_y_ciberseguridad",
-                  "Software, actualizaciones y ciberseguridad")
-    mostrar_campo(ficha, "compatibilidad_con_infraestructura_existente",
-                  "Compatibilidad con infraestructura existente")
-    mostrar_campo(ficha, "idioma_de_interfaz_y_manuales",
-                  "Idioma de interfaz y manuales")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "especificaciones_minimas_de_desempeno", "Especificaciones mínimas de desempeño",   modo="lista")
+    mostrados += mostrar_campo(ficha, "parametros_tecnicos",                   "Parámetros técnicos relevantes",          modo="lista")
+    mostrados += mostrar_campo(ficha, "especificaciones_tecnicas",             "Especificaciones técnicas",               modo="lista")
+    mostrados += mostrar_campo(ficha, "software_y_ciberseguridad",             "Software, actualizaciones y ciberseguridad")
+    mostrados += mostrar_campo(ficha, "compatibilidad_infraestructura",        "Compatibilidad con infraestructura existente")
+    mostrados += mostrar_campo(ficha, "idioma_de_interfaz",                    "Idioma de interfaz y manuales")
+    if not mostrados:
+        tab_vacia()
 
 # ── 5. Características físicas y preinstalación ───────────────────────────────
+# Encabezados Sheets nuevos: "Portabilidad"
 with tabs[4]:
-    mostrar_campo(ficha, "portabilidad_tipo_de_instalacion",
-                  "Portabilidad / tipo de instalación")
-    mostrar_campo(ficha, "requisitos_tecnicos_de_preinstalacion_electricos_ambientales_mecanicos_hidraulicos",
-                  "Requisitos técnicos de preinstalación (eléctricos, ambientales, mecánicos, hidráulicos)",
-                  modo="lista")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "portabilidad",     "Portabilidad / tipo de instalación")
+    mostrados += mostrar_campo(ficha, "preinstalacion",   "Requisitos técnicos de preinstalación (eléctricos, ambientales, mecánicos, hidráulicos)", modo="lista")
+    if not mostrados:
+        tab_vacia()
 
 # ── 6. Accesorios, consumibles y repuestos ────────────────────────────────────
+# Encabezados Sheets nuevos: "Componentes complementarios" | "Disponibilidad de repuestos"
 with tabs[5]:
-    mostrar_campo(ficha, "accesorios_obligatorios_basicos_consumibles_y_repuestos",
-                  "Accesorios obligatorios básicos, consumibles y repuestos", modo="lista")
-    mostrar_campo(ficha, "componentes_complementarios",
-                  "Componentes complementarios")
-    mostrar_campo(ficha, "disponibilidad_de_repuestos",
-                  "Disponibilidad de repuestos")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "accesorios_consumibles_y_repuestos", "Accesorios obligatorios básicos, consumibles y repuestos", modo="lista")
+    mostrados += mostrar_campo(ficha, "componentes_complementarios",        "Componentes complementarios")
+    mostrados += mostrar_campo(ficha, "disponibilidad_de_repuestos",        "Disponibilidad de repuestos")
+    if not mostrados:
+        tab_vacia()
 
 # ── 7. Embalaje, transporte y almacenamiento ──────────────────────────────────
+# Encabezados Sheets nuevos: "Embalaje transporte almacenamiento"
 with tabs[6]:
-    mostrar_campo(ficha, "embalaje_transporte_y_almacenamiento",
-                  "Embalaje, transporte y almacenamiento")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "embalaje_transporte_almacenamiento", "Embalaje, transporte y almacenamiento")
+    if not mostrados:
+        tab_vacia()
 
 # ── 8. Requisitos ambientales y bioseguridad ──────────────────────────────────
+# Encabezados Sheets nuevos: "Limpieza y desinfección" | "Disposición final RAEE"
 with tabs[7]:
-    mostrar_campo(ficha, "limpieza_desinfeccion_y_bioseguridad",
-                  "Limpieza, desinfección y bioseguridad")
-    mostrar_campo(ficha, "disposicion_final_gestion_ambiental_raee",
-                  "Disposición final / gestión ambiental (RAEE)")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "limpieza_y_desinfeccion",  "Limpieza, desinfección y bioseguridad")
+    mostrados += mostrar_campo(ficha, "disposicion_final_raee",   "Disposición final / gestión ambiental (RAEE)")
+    if not mostrados:
+        tab_vacia()
 
 # ── 9. Capacitación, instalación y aceptación ────────────────────────────────
+# Encabezados Sheets nuevos: "Criterios de aceptación"
 with tabs[8]:
-    mostrar_campo(ficha, "entrenamiento",
-                  "Entrenamiento", modo="lista")
-    mostrar_campo(ficha, "criterios_de_aceptacion",
-                  "Criterios de aceptación", modo="lista")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "entrenamiento",          "Entrenamiento",          modo="lista")
+    mostrados += mostrar_campo(ficha, "criterios_de_aceptacion", "Criterios de aceptación", modo="lista")
+    if not mostrados:
+        tab_vacia()
 
 # ── 10. Garantía, mantenimiento y soporte ────────────────────────────────────
+# Encabezados Sheets nuevos: "Tipo de contrato de servicio" | "Calibración y trazabilidad" |
+#                             "Soporte técnico local"
 with tabs[9]:
-    mostrar_campo(ficha, "garantia",
-                  "Garantía")
-    mostrar_campo(ficha, "mantenimiento",
-                  "Mantenimiento", modo="lista")
-    mostrar_campo(ficha, "tipo_de_contrato_de_servicio",
-                  "Tipo de contrato de servicio")
-    mostrar_campo(ficha, "calibracion_y_trazabilidad_metrologica",
-                  "Calibración y trazabilidad metrológica")
-    mostrar_campo(ficha, "soporte_tecnico_local",
-                  "Soporte técnico local")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "garantia",                  "Garantía")
+    mostrados += mostrar_campo(ficha, "mantenimiento",             "Mantenimiento",                    modo="lista")
+    mostrados += mostrar_campo(ficha, "tipo_de_contrato_de_servicio", "Tipo de contrato de servicio")
+    mostrados += mostrar_campo(ficha, "calibracion_y_trazabilidad",   "Calibración y trazabilidad metrológica")
+    mostrados += mostrar_campo(ficha, "soporte_tecnico_local",        "Soporte técnico local")
+    if not mostrados:
+        tab_vacia()
 
 # ── 11. Documentación ────────────────────────────────────────────────────────
 with tabs[10]:
-    mostrar_campo(ficha, "documentacion",
-                  "Documentación", modo="lista")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "documentacion", "Documentación", modo="lista")
+    if not mostrados:
+        tab_vacia()
 
 # ── 12. Ciclo de vida y costos ───────────────────────────────────────────────
+# Encabezados Sheets nuevos: "Vida útil" | "Costo total de propiedad"
 with tabs[11]:
-    mostrar_campo(ficha, "vida_util_estimada_y_obsolescencia",
-                  "Vida útil estimada y obsolescencia")
-    mostrar_campo(ficha, "costo_total_de_propiedad_y_consumibles_recurrentes",
-                  "Costo total de propiedad y consumibles recurrentes")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "vida_util",                      "Vida útil estimada y obsolescencia")
+    mostrados += mostrar_campo(ficha, "costo_total_de_propiedad",       "Costo total de propiedad y consumibles recurrentes")
+    if not mostrados:
+        tab_vacia()
 
 # ── 13. Seguridad y normas ───────────────────────────────────────────────────
+# Encabezados Sheets nuevos: "Clasificación de riesgo" | "Partes aplicables al paciente" |
+#   "Registro INVIMA" | "Certificaciones internacionales" | "Referencias normativas" |
+#   "Normas para el fabricante" | "Normas para el producto" | "Validación clínica"
 with tabs[12]:
-    mostrar_campo(ficha, "clasificacion_de_riesgo_del_dispositivo",
-                  "Clasificación de riesgo del dispositivo")
-    mostrar_campo(ficha, "clasificacion_de_partes_aplicables_al_paciente",
-                  "Clasificación de partes aplicables al paciente")
-    mostrar_campo(ficha, "registro_sanitario_invima",
-                  "Registro sanitario INVIMA")
-    mostrar_campo(ficha, "certificaciones_internacionales",
-                  "Certificaciones internacionales")
-    mostrar_campo(ficha, "referencias_normativas",
-                  "Referencias normativas")
-    mostrar_campo(ficha, "normas_para_el_fabricante",
-                  "Normas para el fabricante", modo="lista")
-    mostrar_campo(ficha, "normas_para_el_producto",
-                  "Normas para el producto", modo="lista")
-    mostrar_campo(ficha, "normas_sobre_la_validacion_clinica",
-                  "Normas sobre la validación clínica")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "clasificacion_de_riesgo",          "Clasificación de riesgo del dispositivo")
+    mostrados += mostrar_campo(ficha, "partes_aplicables_al_paciente",    "Clasificación de partes aplicables al paciente")
+    mostrados += mostrar_campo(ficha, "registro_invima",                  "Registro sanitario INVIMA")
+    mostrados += mostrar_campo(ficha, "certificaciones_internacionales",  "Certificaciones internacionales")
+    mostrados += mostrar_campo(ficha, "referencias_normativas",           "Referencias normativas",          modo="lista")
+    mostrados += mostrar_campo(ficha, "normas_para_el_fabricante",        "Normas para el fabricante",       modo="lista")
+    mostrados += mostrar_campo(ficha, "normas_para_el_producto",          "Normas para el producto",         modo="lista")
+    mostrados += mostrar_campo(ficha, "validacion_clinica",               "Normas sobre la validación clínica")
+    if not mostrados:
+        tab_vacia()
 
 # ── 14. Adquisición ──────────────────────────────────────────────────────────
+# Encabezados Sheets nuevos: "Cantidad requerida" | "Presupuesto referencial"
 with tabs[13]:
-    mostrar_campo(ficha, "cantidad_requerida",
-                  "Cantidad requerida")
-    mostrar_campo(ficha, "presupuesto_referencial",
-                  "Presupuesto referencial")
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "cantidad_requerida",      "Cantidad requerida")
+    mostrados += mostrar_campo(ficha, "presupuesto_referencial", "Presupuesto referencial")
+    if not mostrados:
+        tab_vacia()
 
 # ── 15. Revisión institucional ───────────────────────────────────────────────
+# Encabezados Sheets nuevos: "Revisión institucional"
 with tabs[14]:
-    mostrar_campo(
-        ficha,
-        "revision_por_equipo_de_proyectos_gobernacion_de_antioquia_y_usuarios_asistenciales",
-        "Revisión por Equipo de proyectos – Gobernación de Antioquia y usuarios asistenciales",
-    )
+    mostrados = 0
+    mostrados += mostrar_campo(ficha, "revision_institucional",
+                               "Revisión – Equipo de proyectos Gobernación de Antioquia y usuarios asistenciales")
+    if not mostrados:
+        tab_vacia()
